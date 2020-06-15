@@ -10,6 +10,9 @@
 .sorting {
     display: flex;
 }
+.sorting div {
+    display: flex;
+}
 .sorting span {
     margin-right: 10px;
 }

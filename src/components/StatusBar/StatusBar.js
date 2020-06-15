@@ -1,10 +1,11 @@
 import React from 'react';
 import styles from './styles.module.css';
 
-export function StatusBar({ children, checked }) {
+export function StatusBar({ children, select }) {
   return (
     <div className={styles.container}>
       <div className={styles.counter}>{children}</div>
+      <div>{select}</div>
       <div className={styles.sorting}>
         <span>Sort by</span>
         <ul className={styles.sortingBy}>

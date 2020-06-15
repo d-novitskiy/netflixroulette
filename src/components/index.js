@@ -7,3 +7,4 @@ export { Movie } from './Movie';
 export { Footer } from './Footer';
 export { Pagination } from './Pagination';
 export { MovieDescription } from './MovieDescription';
+export { SelectMoviesPerPage } from './SelectMoviesPerPage';

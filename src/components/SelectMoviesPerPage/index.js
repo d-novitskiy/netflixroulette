@@ -1,0 +1,1 @@
+export { SelectMoviesPerPage } from './SelectMoviesPerPage';
