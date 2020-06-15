@@ -1,0 +1,26 @@
+.btn {
+    background-color: #414141;
+    color: aliceblue;
+    text-transform: uppercase;
+    border: none;
+    font-size: 12px;
+    border-radius: 5px;
+    padding: 5px 20px;
+    margin-right: 15px;
+}
+.btn:hover{
+    cursor: pointer;
+    background-color:  #f65064;
+    color: #0f0f0f;
+
+
+}
+.btn:active{
+    background: linear-gradient(130deg, rgba(0,0,0,1) 0%, rgba(246,80,99,1) 22%, rgba(246,80,99,1) 75%, rgba(0,0,0,1) 100%);
+}
+.btn:focus{
+    outline: none;
+}
+.active {
+    background-color: #f65064
+}

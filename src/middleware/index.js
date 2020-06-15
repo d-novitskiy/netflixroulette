@@ -1,0 +1,1 @@
+export { moviesAppMiddleware } from './middleware';

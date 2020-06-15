@@ -1,0 +1,28 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 50px;
+    background-color: rgb(238, 238, 238);
+    color: #000;
+    font-size: 14px;
+    font-weight: 700;
+}
+.sorting {
+    display: flex;
+}
+.sorting span {
+    margin-right: 10px;
+}
+.sortingBy{
+    padding: 0;
+    display: flex;
+    list-style-type: none;
+    margin: 0 auto;
+}
+.sortingBy li {
+    margin-left: 15px;
+    cursor: pointer;
+}
+.sortingBy li:hover{
+    color: #f65064;
+}

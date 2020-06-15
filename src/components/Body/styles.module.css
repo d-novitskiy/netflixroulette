@@ -1,0 +1,10 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 25px;
+    color: #5c5c5c;
+    font-size: 14px;
+    font-weight: 700;
+    background-color: rgb(247, 247, 247);
+    height: auto;
+}

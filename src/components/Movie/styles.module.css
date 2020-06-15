@@ -1,0 +1,51 @@
+.container {
+    max-width: 230px;
+    padding: 10px;
+    cursor: pointer;
+    margin: 10px 0;
+    transition: all ease-in 0.4s;
+}
+.container:focus {
+    outline: none;
+}
+.container:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+.poster {
+    overflow: hidden;
+    width: 230px;
+    height: 340px;
+}
+.poster img {
+    width: 230px;
+    height: 340px;
+    }
+    .container:hover{
+        color: #000000;
+    }
+.container:hover .poster img{
+    cursor: pointer;
+    }
+.description {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+.title {
+    font-size: 14px;
+    text-transform: uppercase;
+    width: 70%;
+}
+.year {
+    display: inline;
+}
+.year span{
+    border: 1px solid #aaa;
+    padding: 2px 5px;
+    font-size: 9px;
+    font-weight: 500;
+}
+.genres {
+    font-size: 10px;
+    font-weight: 400;
+}

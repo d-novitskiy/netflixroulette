@@ -1,0 +1,42 @@
+.container {
+    overflow: hidden;
+    padding: 0 15px;
+    display: flex;
+    justify-content: center;
+    background-color: rgb(247, 247, 247);
+}
+.container ul{
+    padding-left: 0;
+    display: flex;
+}
+.container li {
+    list-style-type: none;
+    border: 1px solid #000;
+    border-left: none;
+
+
+}
+.container li:first-child {
+    border: 1px solid #000;
+}
+.btn {
+    width: 35px;
+    height: 25px;
+    border: none;
+    padding: 5px 10px;
+    background-color: #fff;
+    cursor: pointer;
+}
+.btn:hover {
+    background-color: #ccc;
+}
+.btn:focus {
+    outline: none;
+    background-color: rgb(153, 63, 63);
+}
+.active {
+    border: none;
+    padding: 5px 10px;
+    background-color: #f000ff;
+    cursor: pointer;
+}

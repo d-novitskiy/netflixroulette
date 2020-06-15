@@ -1,0 +1,11 @@
+.container {
+    background-color: rgb(51, 34, 34)
+}
+.title {
+    display: block;
+    margin: 0 50px;
+    padding: 25px 0;
+    color: #f65064;
+    font-size: 20px;
+    font-weight: 700;
+}
