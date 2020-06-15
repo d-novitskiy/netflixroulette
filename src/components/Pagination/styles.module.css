@@ -3,32 +3,36 @@
     padding: 0 15px;
     display: flex;
     justify-content: center;
+    align-items: flex-start;
     background-color: rgb(247, 247, 247);
 }
 .container ul{
     padding-left: 0;
     display: flex;
+    margin-top: 5px;
 }
 .container li {
     list-style-type: none;
-    border: 1px solid #000;
-    border-left: none;
-
-
-}
-.container li:first-child {
-    border: 1px solid #000;
 }
 .btn {
     width: 35px;
     height: 25px;
-    border: none;
+    border: 1px solid #ccc;
+    border-left: none;
     padding: 5px 10px;
     background-color: #fff;
     cursor: pointer;
+    font-weight: 500;
+    background: linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%);
+}
+.btn:first-child{
+    border: 1px solid #ccc;
 }
 .btn:hover {
-    background-color: #ccc;
+    background: linear-gradient(to bottom, #e5e5e5 0%,#bebebe 100%);
+}
+.btn:active {
+    background: linear-gradient(to top, #e5e5e5 0%,#bebebe 100%);
 }
 .btn:focus {
     outline: none;

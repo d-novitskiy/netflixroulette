@@ -1,5 +1,6 @@
 .container {
-    background-color: rgb(51, 34, 34)
+    background-color: rgb(51, 34, 34);
+    border-radius: 0 0 5px 15px;
 }
 .title {
     display: block;

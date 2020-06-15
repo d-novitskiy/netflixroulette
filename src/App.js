@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import './App.css';
 import { useSelector, useDispatch } from 'react-redux';
 import Loader from 'react-loader-spinner';
-import { GET_MOVIES_REQUEST, GET_MOVIE_DESCRIPTION, CLOSE_MOVIE_DESCRIPTION } from './actions/actions';
 import {
-  Header, StatusBar, Body, Movie, Footer, Pagination, MovieDescription,
+  GET_MOVIES_REQUEST, GET_MOVIE_DESCRIPTION, CLOSE_MOVIE_DESCRIPTION, GET_INITIAL_STATE,
+} from './actions/actions';
+import {
+  Header, StatusBar, Body, Movie, Footer, Pagination, MovieDescription, SelectMoviesPerPage,
 } from './components';
 import { getMovieDescription } from './api/getMovieDescription';
 
@@ -18,6 +20,14 @@ function App() {
   const [page, setPage] = useState(1);
   const [moviesPerPage, setMoviesPerPage] = useState(9);
   const dispatch = useDispatch();
+  function getInitialState() {
+    getInitialState(moviesPerPage).then((movies) => {
+      dispatch({
+        type: GET_INITIAL_STATE,
+        data: movies.data,
+      });
+    });
+  }
   function getMovies(e) {
     e.preventDefault();
     setInputValue('');
@@ -60,11 +70,16 @@ function App() {
         placeholder="Type to find a movie"
         onSubmit={getMovies}
       />
-      <StatusBar>
+      <StatusBar select={(
+        <SelectMoviesPerPage
+          value={moviesPerPage}
+          onSelectChange={setMoviesPerPage}
+        />
+      )}
+      >
         {`${total} 
           movies found`}
       </StatusBar>
-      <Pagination page={page} moviesPerPage={moviesPerPage} total={total} paginate={paginate} />
       <Body>
         {currentMovies.map((item) => {
           const year = new Date(item.release_date);
@@ -83,8 +98,6 @@ function App() {
         })}
       </Body>
       <Pagination moviesPerPage={moviesPerPage} total={total} paginate={paginate} />
-
-
       <Footer siteName="netflixroulette" />
       <div className="loader" style={{ visibility: `${loading ? 'visible' : 'hidden'}`, zIndex: `${loading ? '1' : '-1'}` }}>
         <div className="loader_inner">
