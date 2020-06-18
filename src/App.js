@@ -4,7 +4,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import Loader from 'react-loader-spinner';
 import { Switch, Route } from 'react-router-dom';
 import {
-  GET_MOVIES_REQUEST, GET_MOVIE_DESCRIPTION, CLOSE_MOVIE_DESCRIPTION, GET_INITIAL_STATE, SET_SORTING,
+  GET_MOVIES_REQUEST,
+  GET_MOVIE_DESCRIPTION,
+  CLOSE_MOVIE_DESCRIPTION,
+  SET_SORTING,
 } from './actions/actions';
 import {
   Header, StatusBar, Body, Movie, Footer, Pagination, MovieDescription, SelectMoviesPerPage,
@@ -16,7 +19,6 @@ function App() {
   const {
     data, total, loading, movieDescription, openModal,
   } = useSelector((state) => state.moviesApp);
-  const [pageNum, setPageNum] = useState(1);
   const [sorting, setSorting] = useState();
   const [search, setSearch] = useState('title');
   const [inputValue, setInputValue] = useState('');
@@ -45,14 +47,14 @@ function App() {
       });
     }
   }
-  function getInitialState() {
-    getInitialState(moviesPerPage).then((movies) => {
-      dispatch({
-        type: GET_INITIAL_STATE,
-        data: movies.data,
-      });
-    });
-  }
+  // function getInitialState() {
+  //   getInitialState(moviesPerPage).then((movies) => {
+  //     dispatch({
+  //       type: GET_INITIAL_STATE,
+  //       data: movies.data,
+  //     });
+  //   });
+  // }
   function getMovies(e) {
     e.preventDefault();
     setSorting('');
@@ -127,7 +129,11 @@ function App() {
             );
           })}
         </Body>
-        <Pagination pageNum={pageNum} moviesPerPage={moviesPerPage} total={total} paginate={paginate} />
+        <Pagination
+          moviesPerPage={moviesPerPage}
+          total={total}
+          paginate={paginate}
+        />
         <Footer siteName="netflixroulette" />
         <div className="loader" style={{ visibility: `${loading ? 'visible' : 'hidden'}`, zIndex: `${loading ? '1' : '-1'}` }}>
           <div className="loader_inner">
