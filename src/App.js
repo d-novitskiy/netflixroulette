@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import { useSelector, useDispatch } from 'react-redux';
 import Loader from 'react-loader-spinner';
+import { Switch, Route } from 'react-router-dom';
 import {
   GET_MOVIES_REQUEST, GET_MOVIE_DESCRIPTION, CLOSE_MOVIE_DESCRIPTION, GET_INITIAL_STATE, SET_SORTING,
 } from './actions/actions';
@@ -15,6 +16,8 @@ function App() {
   const {
     data, total, loading, movieDescription, openModal,
   } = useSelector((state) => state.moviesApp);
+  const [pageNum, setPageNum] = useState(1);
+  const [sorting, setSorting] = useState();
   const [search, setSearch] = useState('title');
   const [inputValue, setInputValue] = useState('');
   const [page, setPage] = useState(1);
@@ -23,6 +26,7 @@ function App() {
 
   function onSortClick(value) {
     if (value === 'date') {
+      setSorting(value);
       data.sort((a, b) => {
         const dateA = new Date(a.release_date);
         const dateB = new Date(b.release_date);
@@ -33,6 +37,7 @@ function App() {
         data,
       });
     } else if (value === 'rating') {
+      setSorting(value);
       data.sort((a, b) => b.vote_average - a.vote_average);
       dispatch({
         type: SET_SORTING,
@@ -40,8 +45,6 @@ function App() {
       });
     }
   }
-
-
   function getInitialState() {
     getInitialState(moviesPerPage).then((movies) => {
       dispatch({
@@ -52,6 +55,7 @@ function App() {
   }
   function getMovies(e) {
     e.preventDefault();
+    setSorting('');
     setInputValue('');
     if (inputValue === '') {
       return;
@@ -80,66 +84,70 @@ function App() {
   const first = last - moviesPerPage;
   const currentMovies = data.slice(first, last);
   return (
-
-    <div className="wrapper">
-      <Header
-        siteName="netflixroulette"
-        value={inputValue}
-        search={search}
-        onChange={setInputValue}
-        onSearchByClick={setSearch}
-        onSearchClick={getMovies}
-        placeholder="Type to find a movie"
-        onSubmit={getMovies}
-      />
-      <StatusBar
-        onSortClick={onSortClick}
-        select={(
-          <SelectMoviesPerPage
-            value={moviesPerPage}
-            onSelectChange={setMoviesPerPage}
-          />
-      )}
-      >
-        {`${total} 
-          movies found`}
-      </StatusBar>
-      <Body>
-        {currentMovies.map((item) => {
-          const year = new Date(item.release_date);
-          return (
-            <Movie
-              key={item.id}
-              poster={item.poster_path}
-              title={item.title}
-              onMovieClick={openMovie}
-              onError={(e) => e.target.src = 'https://lascrucesfilmfest.com/wp-content/uploads/2018/01/no-poster-available-737x1024.jpg'}
-              genres={item.genres.join(', ')}
-              year={year.getFullYear()}
-              id={item.id}
-              rating={item.vote_average}
+    <Switch>
+      <div className="wrapper">
+        <Header
+          siteName="netflixroulette"
+          value={inputValue}
+          search={search}
+          onChange={setInputValue}
+          onSearchByClick={setSearch}
+          onSearchClick={getMovies}
+          placeholder="Type to find a movie"
+          onSubmit={getMovies}
+        />
+        <StatusBar
+          active={sorting}
+          onSortClick={onSortClick}
+          select={(
+            <SelectMoviesPerPage
+              value={moviesPerPage}
+              onSelectChange={setMoviesPerPage}
             />
-          );
-        })}
-      </Body>
-      <Pagination moviesPerPage={moviesPerPage} total={total} paginate={paginate} />
-      <Footer siteName="netflixroulette" />
-      <div className="loader" style={{ visibility: `${loading ? 'visible' : 'hidden'}`, zIndex: `${loading ? '1' : '-1'}` }}>
-        <div className="loader_inner">
-          <Loader color="#f65064" type="Bars" visible={loading} />
+      )}
+        >
+          {`${total} 
+          movies found`}
+        </StatusBar>
+        <Body>
+          {currentMovies.map((item) => {
+            const year = new Date(item.release_date);
+            return (
+              <Movie
+                key={item.id}
+                poster={item.poster_path}
+                title={item.title}
+                onMovieClick={openMovie}
+                onError={(e) => e.target.src = 'https://lascrucesfilmfest.com/wp-content/uploads/2018/01/no-poster-available-737x1024.jpg'}
+                genres={item.genres.join(', ')}
+                year={year.getFullYear()}
+                id={item.id}
+                rating={item.vote_average}
+              />
+            );
+          })}
+        </Body>
+        <Pagination pageNum={pageNum} moviesPerPage={moviesPerPage} total={total} paginate={paginate} />
+        <Footer siteName="netflixroulette" />
+        <div className="loader" style={{ visibility: `${loading ? 'visible' : 'hidden'}`, zIndex: `${loading ? '1' : '-1'}` }}>
+          <div className="loader_inner">
+            <Loader color="#f65064" type="Bars" visible={loading} />
+          </div>
         </div>
+        <Route path={data.id}>
+          <MovieDescription
+            title={movieDescription.title}
+            genres={movieDescription.genres === undefined ? '' : movieDescription.genres.join(', ')}
+            description={movieDescription.overview}
+            popularity={movieDescription.vote_average}
+            budget={movieDescription.budget}
+            img={movieDescription.poster_path}
+            openModal={openModal}
+            onCloseModal={closeModal}
+          />
+        </Route>
       </div>
-      <MovieDescription
-        title={movieDescription.title}
-        genres={movieDescription.genres === undefined ? '' : movieDescription.genres.join(', ')}
-        description={movieDescription.overview}
-        popularity={movieDescription.vote_average}
-        budget={movieDescription.budget}
-        img={movieDescription.poster_path}
-        openModal={openModal}
-        onCloseModal={closeModal}
-      />
-    </div>
+    </Switch>
   );
 }
 

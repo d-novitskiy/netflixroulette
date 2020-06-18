@@ -14,7 +14,7 @@
     display: flex;
 }
 .sorting span {
-    margin-right: 10px;
+    padding-top: 1px;
 }
 .sortingBy{
     padding: 0;
@@ -28,4 +28,25 @@
 }
 .sortingBy li:hover{
     color: #f65064;
+}
+.btn {
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    color: #000
+}
+.btn:hover {
+    color: #f65064;
+}
+.btn:active {
+    color: #f65064;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 15px;
+}
+.btn:focus {
+    outline: none;
+}
+.active {
+    color: #f65064
 }

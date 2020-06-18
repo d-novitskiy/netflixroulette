@@ -1,7 +1,9 @@
 import React from 'react';
 import styles from './styles.module.css';
 
-export function StatusBar({ children, select, onSortClick }) {
+export function StatusBar({
+  children, select, onSortClick, active,
+}) {
   function onClickHandler(e) {
     onSortClick(e.target.value);
   }
@@ -10,13 +12,13 @@ export function StatusBar({ children, select, onSortClick }) {
       <div className={styles.counter}>{children}</div>
       <div>{select}</div>
       <div className={styles.sorting}>
-        <span>Sort by</span>
+        <span>Sort by:</span>
         <ul className={styles.sortingBy}>
           <li>
-            <button value="date" type="button" onClick={onClickHandler}>Realease date</button>
+            <button className={active === 'date' ? `${styles.btn} ${styles.active}` : styles.btn} value="date" type="button" onClick={onClickHandler}>Realease date</button>
           </li>
           <li>
-            <button value="rating" type="button" onClick={onClickHandler}>Rating</button>
+            <button className={active === 'rating' ? `${styles.btn} ${styles.active}` : styles.btn} value="rating" type="button" onClick={onClickHandler}>Rating</button>
           </li>
         </ul>
       </div>
