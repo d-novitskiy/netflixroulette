@@ -1,5 +1,6 @@
+
 import {
-  GET_MOVIES_REQUEST, GET_MOVIES_FAILURE, GET_MOVIES_SUCCESS, GET_MOVIE_DESCRIPTION, CLOSE_MOVIE_DESCRIPTION, GET_INITIAL_STATE,
+  GET_MOVIES_REQUEST, GET_MOVIES_FAILURE, GET_MOVIES_SUCCESS, GET_MOVIE_DESCRIPTION, CLOSE_MOVIE_DESCRIPTION, GET_INITIAL_STATE, SET_SORTING,
 } from '../actions/actions';
 
 
@@ -59,6 +60,12 @@ export function moviesAppReducer(state = initialState, action) {
         ...state,
         movieDescription: [],
         openModal: false,
+      };
+    }
+    case SET_SORTING: {
+      return {
+        ...state,
+        data: action.data,
       };
     }
     default: return state;

@@ -41,6 +41,6 @@
 .active {
     border: none;
     padding: 5px 10px;
-    background-color: #f000ff;
+    background: linear-gradient(to top, #e5e5e5 0%,#bebebe 100%);
     cursor: pointer;
 }

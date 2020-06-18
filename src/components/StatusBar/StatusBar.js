@@ -1,7 +1,10 @@
 import React from 'react';
 import styles from './styles.module.css';
 
-export function StatusBar({ children, select }) {
+export function StatusBar({ children, select, onSortClick }) {
+  function onClickHandler(e) {
+    onSortClick(e.target.value);
+  }
   return (
     <div className={styles.container}>
       <div className={styles.counter}>{children}</div>
@@ -10,10 +13,10 @@ export function StatusBar({ children, select }) {
         <span>Sort by</span>
         <ul className={styles.sortingBy}>
           <li>
-            Realease date
+            <button value="date" type="button" onClick={onClickHandler}>Realease date</button>
           </li>
           <li>
-            Rating
+            <button value="rating" type="button" onClick={onClickHandler}>Rating</button>
           </li>
         </ul>
       </div>

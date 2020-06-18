@@ -3,7 +3,7 @@ import './App.css';
 import { useSelector, useDispatch } from 'react-redux';
 import Loader from 'react-loader-spinner';
 import {
-  GET_MOVIES_REQUEST, GET_MOVIE_DESCRIPTION, CLOSE_MOVIE_DESCRIPTION, GET_INITIAL_STATE,
+  GET_MOVIES_REQUEST, GET_MOVIE_DESCRIPTION, CLOSE_MOVIE_DESCRIPTION, GET_INITIAL_STATE, SET_SORTING,
 } from './actions/actions';
 import {
   Header, StatusBar, Body, Movie, Footer, Pagination, MovieDescription, SelectMoviesPerPage,
@@ -20,6 +20,28 @@ function App() {
   const [page, setPage] = useState(1);
   const [moviesPerPage, setMoviesPerPage] = useState(9);
   const dispatch = useDispatch();
+
+  function onSortClick(value) {
+    if (value === 'date') {
+      data.sort((a, b) => {
+        const dateA = new Date(a.release_date);
+        const dateB = new Date(b.release_date);
+        return dateA - dateB;
+      });
+      dispatch({
+        type: SET_SORTING,
+        data,
+      });
+    } else if (value === 'rating') {
+      data.sort((a, b) => b.vote_average - a.vote_average);
+      dispatch({
+        type: SET_SORTING,
+        data,
+      });
+    }
+  }
+
+
   function getInitialState() {
     getInitialState(moviesPerPage).then((movies) => {
       dispatch({
@@ -70,11 +92,13 @@ function App() {
         placeholder="Type to find a movie"
         onSubmit={getMovies}
       />
-      <StatusBar select={(
-        <SelectMoviesPerPage
-          value={moviesPerPage}
-          onSelectChange={setMoviesPerPage}
-        />
+      <StatusBar
+        onSortClick={onSortClick}
+        select={(
+          <SelectMoviesPerPage
+            value={moviesPerPage}
+            onSelectChange={setMoviesPerPage}
+          />
       )}
       >
         {`${total} 
@@ -93,6 +117,7 @@ function App() {
               genres={item.genres.join(', ')}
               year={year.getFullYear()}
               id={item.id}
+              rating={item.vote_average}
             />
           );
         })}

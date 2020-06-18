@@ -1,17 +1,16 @@
 .container {
     max-width: 230px;
     padding: 10px;
-    cursor: pointer;
     margin: 10px 0;
     transition: all ease-in 0.4s;
+    z-index: 0;
+    cursor: pointer;
 }
 .container:focus {
     outline: none;
 }
-.container:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-}
 .poster {
+    position: relative;
     overflow: hidden;
     width: 230px;
     height: 340px;
@@ -19,13 +18,14 @@
 .poster img {
     width: 230px;
     height: 340px;
-    }
-    .container:hover{
-        color: #000000;
-    }
+    transition: all ease-out 0.5s;
+}
+.container:hover{
+    color: #000000;
+}
 .container:hover .poster img{
-    cursor: pointer;
-    }
+    transform: scale(1.1);
+}
 .description {
     display: flex;
     justify-content: space-between;
@@ -48,4 +48,19 @@
 .genres {
     font-size: 10px;
     font-weight: 400;
+}
+.rating {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    border-radius: 45px;
+    bottom: 10px;
+    right: 10px;
+    color: #fff;
+    font-weight: 700;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
 }
