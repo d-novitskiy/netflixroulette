@@ -1,5 +1,8 @@
 .wrapper {
   max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 50px);
   margin: 0 auto;
   margin-top: 50px;
 }
@@ -21,4 +24,8 @@
   align-items: top;
   justify-content: center;
   width: 100%;
+}
+.emptyBody {
+  display: flex;
+  margin: auto;
 }

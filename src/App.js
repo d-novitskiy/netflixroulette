@@ -112,22 +112,23 @@ function App() {
           movies found`}
         </StatusBar>
         <Body>
-          {currentMovies.map((item) => {
-            const year = new Date(item.release_date);
-            return (
-              <Movie
-                key={item.id}
-                poster={item.poster_path}
-                title={item.title}
-                onMovieClick={openMovie}
-                onError={(e) => e.target.src = 'https://lascrucesfilmfest.com/wp-content/uploads/2018/01/no-poster-available-737x1024.jpg'}
-                genres={item.genres.join(', ')}
-                year={year.getFullYear()}
-                id={item.id}
-                rating={item.vote_average}
-              />
-            );
-          })}
+          { currentMovies.length === 0 ? <div className="emptyBody">Search your movie</div>
+            : currentMovies.map((item) => {
+              const year = new Date(item.release_date);
+              return (
+                <Movie
+                  key={item.id}
+                  poster={item.poster_path}
+                  title={item.title}
+                  onMovieClick={openMovie}
+                  onError={(e) => e.target.src = 'https://lascrucesfilmfest.com/wp-content/uploads/2018/01/no-poster-available-737x1024.jpg'}
+                  genres={item.genres.join(', ')}
+                  year={year.getFullYear()}
+                  id={item.id}
+                  rating={item.vote_average}
+                />
+              );
+            })}
         </Body>
         <Pagination
           moviesPerPage={moviesPerPage}

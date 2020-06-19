@@ -6,4 +6,5 @@
     font-size: 14px;
     font-weight: 700;
     background-color: rgb(247, 247, 247);
+    min-height: calc(100vh - 481px)
 }

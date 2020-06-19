@@ -19,6 +19,7 @@ a:hover{
 }
 .root {
   margin-top: 50px;
+  min-height: calc(100vh - 50px);
 }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
