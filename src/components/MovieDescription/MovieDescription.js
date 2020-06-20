@@ -1,13 +1,17 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import styles from './styles.module.css';
 
 export function MovieDescription({
-  title, genres, description, popularity, budget, img, openModal, onCloseModal,
+  title, genres, description, popularity, budget, img, displayDescription, style,
 }) {
-  return (
+  const { id } = useParams();
+  useEffect(() => {
+    displayDescription(id);
+  }, [id]);
 
-    <div onClick={onCloseModal} className={styles.modal} style={{ visibility: `${openModal ? 'visible' : 'hidden'}` }}>
+  return (
+    <div className={styles.modal} style={style}>
       <Link className={styles.modal} style={{ background: 'none' }} to="/" />
       <div className={styles.container}>
         <div style={{
@@ -19,7 +23,7 @@ export function MovieDescription({
           margin: '0 auto',
         }}
         >
-          <div onClick={(e) => e.stopPropagation()} className={styles.description}>
+          <div className={styles.description}>
             <h1 className={styles.title}>{title}</h1>
             <div className={styles.genres}>{genres}</div>
             <div className={styles.movieDescription}>{`Description: ${description}`}</div>

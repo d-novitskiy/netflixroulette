@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom';
 import styles from './styles.module.css';
 
 export function Movie({
-  title, poster, onError, year, genres, id, onMovieClick, rating,
+  title, poster, onError, year, genres, id, rating,
 }) {
-  const onClickHandler = () => {
-    onMovieClick(id);
-  };
+  // const onClickHandler = () => {
+  //   onMovieClick(id);
+  // };
   return (
     <Link to={`/movies/${id}`}>
-      <div id={id} className={styles.container} onClick={onClickHandler} onKeyDown={() => id} role="button" tabIndex={0}>
+      <div id={id} className={styles.container} onKeyDown={() => id} role="button" tabIndex={0}>
         <div className={styles.poster}>
           <div className={styles.rating}>{rating}</div>
           <img alt={title} src={poster} onError={onError} />

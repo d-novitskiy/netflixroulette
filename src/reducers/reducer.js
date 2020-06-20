@@ -3,8 +3,8 @@ import {
   GET_MOVIES_REQUEST,
   GET_MOVIES_FAILURE,
   GET_MOVIES_SUCCESS,
+  GET_MOVIE_REQUEST,
   GET_MOVIE_DESCRIPTION,
-  CLOSE_MOVIE_DESCRIPTION,
   GET_INITIAL_STATE,
   SET_SORTING,
 } from '../actions/actions';
@@ -18,7 +18,6 @@ const initialState = {
   total: 0,
   offset: 0,
   limit: 9,
-  openModal: false,
 };
 
 export function moviesAppReducer(state = initialState, action) {
@@ -29,6 +28,7 @@ export function moviesAppReducer(state = initialState, action) {
         loading: false,
         error: null,
         data: action.data,
+        total: action.total,
       };
     }
     case GET_MOVIES_REQUEST: {
@@ -54,18 +54,18 @@ export function moviesAppReducer(state = initialState, action) {
         error: action.data,
       };
     }
+    case GET_MOVIE_REQUEST: {
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
+    }
     case GET_MOVIE_DESCRIPTION: {
       return {
         ...state,
+        loading: false,
         movieDescription: action.movieDescription,
-        openModal: true,
-      };
-    }
-    case CLOSE_MOVIE_DESCRIPTION: {
-      return {
-        ...state,
-        movieDescription: [],
-        openModal: false,
       };
     }
     case SET_SORTING: {

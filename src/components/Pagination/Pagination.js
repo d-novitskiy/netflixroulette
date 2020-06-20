@@ -52,7 +52,14 @@ export function Pagination({
         <li><button disabled={!(visiblePages > 1)} id="prev" type="button" className={styles.btn} onClick={changeVisiblePages}>{'<'}</button></li>
         {pages.filter((page) => page >= leftBorderNumber && page <= rightBorderNumber)
           .map((item) => {
-            return <VisiblePages pageNumber={item} onClick={paginateHandler} isActive={currentPage === item} />;
+            return (
+              <VisiblePages
+                pageNumber={item}
+                onClick={paginateHandler}
+                isActive={currentPage === item}
+                key={item}
+              />
+            );
           })}
         <li><button disabled={!(visiblePagesQuantity > visiblePages)} id="next" type="button" className={styles.btn} onClick={changeVisiblePages}>{'>'}</button></li>
         <li><button disabled={!(visiblePagesQuantity > visiblePages)} id="last" type="button" className={styles.btn} onClick={changeVisiblePages}>{'>>'}</button></li>

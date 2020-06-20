@@ -26,6 +26,8 @@ module.exports = {
     "import/prefer-default-export": 0,
     "arrow-body-style": 0,
     "react/prop-types": 0,
-    "linebreak-style": 0
+    "linebreak-style": 0,
+    "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
+    "no-return-assign": 0,
   },
 };

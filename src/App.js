@@ -1,24 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import { useSelector, useDispatch } from 'react-redux';
 import Loader from 'react-loader-spinner';
 import { Switch, Route } from 'react-router-dom';
 import {
   GET_MOVIES_REQUEST,
-  GET_MOVIE_DESCRIPTION,
-  CLOSE_MOVIE_DESCRIPTION,
   SET_SORTING,
+  GET_INITIAL_STATE,
+  GET_MOVIE_REQUEST,
 } from './actions/actions';
 import {
   Header, StatusBar, Body, Movie, Footer, Pagination, MovieDescription, SelectMoviesPerPage,
 } from './components';
-import { getMovieDescription } from './api/getMovieDescription';
+import { getInitialState } from './api';
 
 function App() {
   // redux-data
   const {
-    data, total, loading, movieDescription, openModal,
+    data, total, loading, movieDescription,
   } = useSelector((state) => state.moviesApp);
+
   const dispatch = useDispatch();
 
   // useState
@@ -50,14 +51,15 @@ function App() {
       });
     }
   }
-  // function getInitialState() {
-  //   getInitialState(moviesPerPage).then((movies) => {
-  //     dispatch({
-  //       type: GET_INITIAL_STATE,
-  //       data: movies.data,
-  //     });
-  //   });
-  // }
+  useEffect(() => {
+    getInitialState(moviesPerPage).then((movies) => {
+      dispatch({
+        type: GET_INITIAL_STATE,
+        data: movies.data,
+        total: moviesPerPage,
+      });
+    });
+  }, []);
   function getMovies(e) {
     e.preventDefault();
     setSorting('');
@@ -70,17 +72,11 @@ function App() {
     });
   }
   // Modal
+
   function openMovie(id) {
-    getMovieDescription(id).then((movie) => {
-      dispatch({
-        type: GET_MOVIE_DESCRIPTION,
-        movieDescription: movie,
-      });
-    });
-  }
-  function closeModal() {
     dispatch({
-      type: CLOSE_MOVIE_DESCRIPTION,
+      type: GET_MOVIE_REQUEST,
+      id,
     });
   }
   // pagination
@@ -89,7 +85,6 @@ function App() {
   }
   function changeActivePage(leftBorderNumber) {
     setPage(leftBorderNumber);
-    console.log(page);
   }
   const last = page * moviesPerPage;
   const first = last - moviesPerPage;
@@ -129,8 +124,7 @@ function App() {
                   key={item.id}
                   poster={item.poster_path}
                   title={item.title}
-                  onMovieClick={openMovie}
-                  onError={(e) => e.target.src = 'https://lascrucesfilmfest.com/wp-content/uploads/2018/01/no-poster-available-737x1024.jpg'}
+                  onError={(e) => (e.target.src = 'https://lascrucesfilmfest.com/wp-content/uploads/2018/01/no-poster-available-737x1024.jpg')}
                   genres={item.genres.join(', ')}
                   year={year.getFullYear()}
                   id={item.id}
@@ -152,16 +146,16 @@ function App() {
             <Loader color="#f65064" type="Bars" visible={loading} />
           </div>
         </div>
-        <Route path={data.id}>
+        <Route path="/movies/:id">
           <MovieDescription
+            style={{ visibility: `${!loading ? 'visible' : 'hidden'}` }}
             title={movieDescription.title}
             genres={movieDescription.genres === undefined ? '' : movieDescription.genres.join(', ')}
             description={movieDescription.overview}
             popularity={movieDescription.vote_average}
             budget={movieDescription.budget}
             img={movieDescription.poster_path}
-            openModal={openModal}
-            onCloseModal={closeModal}
+            displayDescription={openMovie}
           />
         </Route>
       </div>
