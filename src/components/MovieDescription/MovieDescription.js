@@ -29,6 +29,9 @@ export function MovieDescription({
             <div className={styles.movieDescription}>{`Description: ${description}`}</div>
             <div className={styles.movieDescription}>{`Rating: ${popularity}`}</div>
             <div className={styles.movieDescription}>{`Budget: ${budget}`}</div>
+            <div className={styles.link}>
+              <a className={styles.linkInner} target="blank" href={`https://rezka.ag/index.php?do=search&subaction=search&q=${title}`}>search on rezka.ag</a>
+            </div>
           </div>
         </div>
       </div>
