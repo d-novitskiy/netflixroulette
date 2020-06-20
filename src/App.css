@@ -26,6 +26,7 @@
   width: 100%;
 }
 .emptyBody {
+  font-size: 32px;
   display: flex;
   margin: auto;
 }

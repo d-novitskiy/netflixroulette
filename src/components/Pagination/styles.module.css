@@ -36,11 +36,17 @@
 }
 .btn:focus {
     outline: none;
-    background-color: rgb(153, 63, 63);
 }
 .active {
-    border: none;
-    padding: 5px 10px;
+    color: #777777;
     background: linear-gradient(to top, #e5e5e5 0%,#bebebe 100%);
-    cursor: pointer;
+}
+.active:hover {
+    background: linear-gradient(to top, #e5e5e5 0%,#bebebe 100%);
+    cursor: default;
+
+}
+.btn[disabled]:hover{
+    background: linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%);
+    cursor: default;
 }

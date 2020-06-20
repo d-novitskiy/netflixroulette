@@ -14,18 +14,21 @@ import {
 } from './components';
 import { getMovieDescription } from './api/getMovieDescription';
 
-
 function App() {
+  // redux-data
   const {
     data, total, loading, movieDescription, openModal,
   } = useSelector((state) => state.moviesApp);
+  const dispatch = useDispatch();
+
+  // useState
   const [sorting, setSorting] = useState();
   const [search, setSearch] = useState('title');
   const [inputValue, setInputValue] = useState('');
   const [page, setPage] = useState(1);
   const [moviesPerPage, setMoviesPerPage] = useState(9);
-  const dispatch = useDispatch();
 
+  // sortBy
   function onSortClick(value) {
     if (value === 'date') {
       setSorting(value);
@@ -66,6 +69,7 @@ function App() {
       type: GET_MOVIES_REQUEST, search: inputValue.toLowerCase(), searchBy: search,
     });
   }
+  // Modal
   function openMovie(id) {
     getMovieDescription(id).then((movie) => {
       dispatch({
@@ -79,8 +83,13 @@ function App() {
       type: CLOSE_MOVIE_DESCRIPTION,
     });
   }
+  // pagination
   function paginate(pageNumber) {
     setPage(pageNumber);
+  }
+  function changeActivePage(leftBorderNumber) {
+    setPage(leftBorderNumber);
+    console.log(page);
   }
   const last = page * moviesPerPage;
   const first = last - moviesPerPage;
@@ -112,7 +121,7 @@ function App() {
           movies found`}
         </StatusBar>
         <Body>
-          { currentMovies.length === 0 ? <div className="emptyBody">Search your movie</div>
+          { currentMovies.length === 0 ? <div className="emptyBody">Find your movie</div>
             : currentMovies.map((item) => {
               const year = new Date(item.release_date);
               return (
@@ -134,6 +143,8 @@ function App() {
           moviesPerPage={moviesPerPage}
           total={total}
           paginate={paginate}
+          changeActivePage={changeActivePage}
+          currentPage={page}
         />
         <Footer siteName="netflixroulette" />
         <div className="loader" style={{ visibility: `${loading ? 'visible' : 'hidden'}`, zIndex: `${loading ? '1' : '-1'}` }}>
