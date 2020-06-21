@@ -4,7 +4,7 @@ import { Button } from '../Button';
 import { SearchBy } from '../SearchBy';
 
 export function Header({
-  placeholder, onSearchClick, onSearchByClick, value, onChange, search, onSubmit, siteName,
+  placeholder, onSearchClick, onSearchByClick, value, onChange, searchBy, onSubmit, siteName,
 }) {
   const onChangeHandler = (e) => {
     onChange(e.target.value);
@@ -24,7 +24,7 @@ export function Header({
               <span className={styles.enter} />
             </div>
             <div className={styles.controlPanel}>
-              <SearchBy onSearchByClick={onSearchByHandler} search={search} />
+              <SearchBy onSearchByClick={onSearchByHandler} searchBy={searchBy} />
               <div>
                 <Button
                   className={styles.btn}

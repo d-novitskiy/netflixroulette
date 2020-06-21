@@ -9,7 +9,11 @@ import {
 
 export const moviesAppMiddleware = (store) => (next) => (action) => {
   if (action.type === GET_MOVIES_REQUEST) {
-    getMovies(action.search, action.searchBy, action.page).then((movies) => {
+    const search = store.getState().moviesApp.inputValue;
+    const { searchBy } = store.getState().moviesApp;
+    const { sortBy } = store.getState().moviesApp;
+    const { sortOrder } = store.getState().moviesApp;
+    getMovies(search, searchBy, action.offset, action.limit, sortBy, sortOrder).then((movies) => {
       store.dispatch({
         type: GET_MOVIES_SUCCESS,
         data: movies.data,

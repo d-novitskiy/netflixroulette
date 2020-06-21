@@ -1,5 +1,5 @@
-export async function getMovies(search, searchBy, page) {
-  const data = await fetch(`https://reactjs-cdp.herokuapp.com/movies?search=${search}&searchBy=${searchBy}&offset=${page}&limit=3000`);
+export async function getMovies(search, searchBy, offset, limit, sortBy, sortOrder) {
+  const data = await fetch(`https://reactjs-cdp.herokuapp.com/movies?sortBy=${sortBy}&sortOrder=${sortOrder}&search=${search}&searchBy=${searchBy}&offset=${offset}&limit=${limit}`);
   const parsedData = await data.json();
   return parsedData;
 }
