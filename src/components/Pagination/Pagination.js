@@ -43,7 +43,7 @@ export function Pagination({
         break;
       case 'next':
         setvisiblePages(visiblePages + 1);
-        changeActivePage(leftBorderNumber + 10);
+        changeActivePage(leftBorderNumber + visiblePagesAmount);
         window.scrollTo({ top: 0, behavior: 'smooth' });
         break;
       case 'last':
