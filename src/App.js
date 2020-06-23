@@ -27,7 +27,9 @@ function App() {
   // useState
   const [inputValue, setInputValue] = useState('');
   const [page, setPage] = useState(1);
-  const [moviesPerPage, setMoviesPerPage] = useState(9);
+  const [moviesPerPage, setMoviesPerPage] = useState(
+    window.innerWidth <= 680 ? 10 : 9,
+  );
 
 
   // set initial state
