@@ -12,18 +12,20 @@ export function MovieDescription({
 
   return (
     <div className={styles.modal} style={style}>
+      <span className={styles.close}>X</span>
       <Link className={styles.modal} style={{ background: 'none' }} to="/" />
       <div className={styles.container}>
-        <div style={{
-          backgroundImage: `url(${img})`,
-          backgroundColor: '#ccc',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          width: '600px',
-          margin: '0 auto',
-        }}
+        <div
+          className={styles.modalBG}
+          style={{
+            backgroundImage: `url(${img})`,
+            backgroundColor: '#ccc',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            margin: '0 auto',
+          }}
         >
-          <div className={styles.description}>
+          <div style={style} className={styles.description}>
             <h1 className={styles.title}>{title}</h1>
             <div className={styles.genres}>{genres}</div>
             <div className={styles.movieDescription}>{`Description: ${description}`}</div>

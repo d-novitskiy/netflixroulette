@@ -1,5 +1,6 @@
 
 import {
+  GET_INITIAL_STATE,
   GET_MOVIES_REQUEST,
   GET_MOVIES_FAILURE,
   GET_MOVIES_SUCCESS,
@@ -21,12 +22,21 @@ const initialState = {
   limit: 9,
   inputValue: '',
   searchBy: 'title',
-  sortBy: 'release_date',
+  sortBy: '',
   sortOrder: 'desc',
 };
 
 export function moviesAppReducer(state = initialState, action) {
   switch (action.type) {
+    case GET_INITIAL_STATE: {
+      return {
+        ...state,
+        loading: false,
+        error: null,
+        data: action.data,
+        total: action.total,
+      };
+    }
     case GET_MOVIES_REQUEST: {
       return {
         ...state,

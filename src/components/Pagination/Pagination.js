@@ -1,11 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './styles.module.css';
 import { VisiblePages } from './VisiblePages';
 
 export function Pagination({
   moviesPerPage, total, paginate, changeActivePage, currentPage,
 }) {
-  const visiblePagesAmount = 10;
+  const [visiblePagesAmount, setVisiblePagesAmount] = useState(
+    window.innerWidth <= 680 ? 4 : 10,
+  );
+  useEffect(() => {
+    window.addEventListener('resize', () => {
+      const width = window.innerWidth;
+      setVisiblePagesAmount(width <= 680 ? 4 : 10);
+    });
+  }, [window.innerWidth]);
+
   const pagesQuantity = Math.ceil(total / moviesPerPage);
   const pages = [];
   for (let i = 1; i <= pagesQuantity; i++) {

@@ -7,9 +7,8 @@ export function SearchBy({ searchBy, onSearchByClick }) {
     'title',
     'genres',
   ];
-  console.log(searchBy);
   return (
-    <div>
+    <div className={styles.searchBy}>
       <span className={styles.searchSpan}>Search by</span>
       {
       buttons.map((item) => {

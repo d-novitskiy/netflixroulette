@@ -9,10 +9,11 @@ export function Movie({
   //   onMovieClick(id);
   // };
   return (
-    <Link to={`/movies/${id}`}>
+    <Link to={`/${id}`}>
       <div id={id} className={styles.container} onKeyDown={() => id} role="button" tabIndex={0}>
         <div className={styles.poster}>
           <div className={styles.rating}>{rating}</div>
+          <div className={styles.showDescription}>Show description</div>
           <img alt={title} src={poster} onError={onError} />
         </div>
         <div className={styles.description}>

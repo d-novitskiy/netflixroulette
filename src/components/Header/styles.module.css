@@ -1,6 +1,6 @@
 .wrapper {
     color: aliceblue;
-    background-image: url(./img/header.jpg);
+    background-image: url(img/header.jpg);
     background-color: #141420;
     background-size: cover;
     background-position: bottom;
@@ -15,7 +15,6 @@
     padding: 25px 0;
     color: #f65064;
     font-size: 20px;
-
 }
 
 .search {
@@ -93,4 +92,32 @@ input[radio]{
 }
 .btn:focus{
     outline: none;
+}
+
+@media (max-width: 600px) {
+    .wrapper {
+        color: aliceblue;
+        background-image: url(img/header.jpg);
+        background-color: #141420;
+        background-size: cover;
+        background-position: bottom;
+        border-radius: 0;
+    }
+    .container {
+        display: block;
+        align-items: center;
+        margin: 0;
+        padding: 0 20px;
+    }
+    .btn {
+        font-size: 14px;
+    }
+    .title {
+        padding: 15px 0;
+        color: #f65064;
+        font-size: 20px;
+    }
+    .controlPanel {
+        padding-bottom: 10px;
+    }
 }

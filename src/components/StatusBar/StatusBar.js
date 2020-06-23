@@ -10,7 +10,7 @@ export function StatusBar({
   return (
     <div className={styles.container}>
       <div className={styles.counter}>{children}</div>
-      <div>{select}</div>
+      <div className={styles.select}>{select}</div>
       <div className={styles.sorting}>
         <span>Sort by:</span>
         <ul className={styles.sortingBy}>

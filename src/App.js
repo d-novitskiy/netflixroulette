@@ -9,10 +9,12 @@ import {
   GET_MOVIE_REQUEST,
   SET_SEARCHING_VALUE,
   SET_SEARCH_BY,
+  GET_INITIAL_STATE,
 } from './actions/actions';
 import {
   Header, StatusBar, Body, Movie, Footer, Pagination, MovieDescription, SelectMoviesPerPage,
 } from './components';
+import { getInitialState } from './api';
 
 function App() {
   // redux-data
@@ -27,15 +29,18 @@ function App() {
   const [page, setPage] = useState(1);
   const [moviesPerPage, setMoviesPerPage] = useState(9);
 
+
   // set initial state
   useEffect(() => {
-    dispatch({
-      type: GET_MOVIES_REQUEST,
-      loading: true,
-      offset: 0,
-      limit: moviesPerPage,
+    getInitialState(moviesPerPage).then((movies) => {
+      dispatch({
+        type: GET_INITIAL_STATE,
+        data: movies.data,
+        total: movies.total,
+      });
     });
   }, []);
+
 
   // sortBy
   function onSortClick(value) {
@@ -172,7 +177,7 @@ function App() {
             <Loader color="#f65064" type="Bars" visible={loading} />
           </div>
         </div>
-        <Route path="/movies/:id">
+        <Route path="/:id">
           <MovieDescription
             style={{ visibility: `${!loading ? 'visible' : 'hidden'}` }}
             title={movieDescription.title}
