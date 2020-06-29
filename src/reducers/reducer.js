@@ -1,12 +1,14 @@
 
 import {
+  GET_INITIAL_STATE,
   GET_MOVIES_REQUEST,
   GET_MOVIES_FAILURE,
   GET_MOVIES_SUCCESS,
   GET_MOVIE_REQUEST,
   GET_MOVIE_DESCRIPTION,
-  GET_INITIAL_STATE,
   SET_SORTING,
+  SET_SEARCHING_VALUE,
+  SET_SEARCH_BY,
 } from '../actions/actions';
 
 
@@ -18,6 +20,10 @@ const initialState = {
   total: 0,
   offset: 0,
   limit: 9,
+  inputValue: '',
+  searchBy: 'title',
+  sortBy: '',
+  sortOrder: 'desc',
 };
 
 export function moviesAppReducer(state = initialState, action) {
@@ -34,8 +40,9 @@ export function moviesAppReducer(state = initialState, action) {
     case GET_MOVIES_REQUEST: {
       return {
         ...state,
-        loading: true,
+        loading: action.loading,
         error: null,
+        sorting: null,
       };
     }
     case GET_MOVIES_SUCCESS: {
@@ -71,7 +78,19 @@ export function moviesAppReducer(state = initialState, action) {
     case SET_SORTING: {
       return {
         ...state,
-        data: action.data,
+        sortBy: action.sortBy,
+      };
+    }
+    case SET_SEARCHING_VALUE: {
+      return {
+        ...state,
+        inputValue: action.inputValue,
+      };
+    }
+    case SET_SEARCH_BY: {
+      return {
+        ...state,
+        searchBy: action.searchBy,
       };
     }
     default: return state;

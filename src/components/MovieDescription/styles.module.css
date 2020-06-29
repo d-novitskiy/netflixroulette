@@ -27,6 +27,9 @@
     cursor: default;
     z-index: 2;
 }
+.modalBG{
+    width: 600px;
+}
 .genres {
     font-size: 16px;
     margin: 10px;
@@ -52,4 +55,33 @@
 }
 .linkInner:hover{
     color: #000;
+}
+.close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    text-align: right;
+}
+@media (max-width: 375px) {
+    .modalBG{
+        width: 350px;
+    }
+}
+@media (min-width: 376px) and (max-width: 420px) {
+    .modalBG{
+        width: 365px;
+    }
+}
+@media (min-width: 421px) and (max-width: 540px) {
+    .modalBG{
+        width: 410px;
+    }
+}
+@media (min-width: 541px) and (max-width: 600px) {
+    .modalBG{
+        width: 530px;
+    }
 }

@@ -5,6 +5,7 @@
   min-height: calc(100vh - 50px);
   margin: 0 auto;
   margin-top: 50px;
+  padding: 0 20px;
 }
 .loader {
   position: fixed;
@@ -29,4 +30,15 @@
   font-size: 32px;
   display: flex;
   margin: auto;
+}
+
+@media (max-width: 600px) {
+  .wrapper {
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh);
+  margin: 0 auto;
+  padding: 0;
+  }
 }

@@ -1,11 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './styles.module.css';
 import { VisiblePages } from './VisiblePages';
 
 export function Pagination({
   moviesPerPage, total, paginate, changeActivePage, currentPage,
 }) {
-  const visiblePagesAmount = 10;
+  const [visiblePagesAmount, setVisiblePagesAmount] = useState(
+    window.innerWidth <= 680 ? 4 : 10,
+  );
+  useEffect(() => {
+    window.addEventListener('resize', () => {
+      const width = window.innerWidth;
+      setVisiblePagesAmount(width <= 680 ? 4 : 10);
+    });
+  }, [window.innerWidth]);
+
   const pagesQuantity = Math.ceil(total / moviesPerPage);
   const pages = [];
   for (let i = 1; i <= pagesQuantity; i++) {
@@ -17,27 +26,30 @@ export function Pagination({
   const leftBorderNumber = (visiblePages - 1) * visiblePagesAmount + 1;
   const rightBorderNumber = visiblePages * visiblePagesAmount;
   const paginateHandler = (id) => {
-    window.scrollTo({ top: 0, behavior: 'auto' });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     paginate(id);
   };
   const changeVisiblePages = (e) => {
-    e.preventDefault();
     switch (e.target.id) {
       case 'first':
         setvisiblePages(1);
         changeActivePage(1);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         break;
       case 'prev':
         setvisiblePages(visiblePages - 1);
         changeActivePage(leftBorderNumber - 1);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         break;
       case 'next':
         setvisiblePages(visiblePages + 1);
-        changeActivePage(leftBorderNumber + 10);
+        changeActivePage(leftBorderNumber + visiblePagesAmount);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         break;
       case 'last':
         setvisiblePages(visiblePagesQuantity);
         changeActivePage(pagesQuantity);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         break;
       default: break;
     }
@@ -56,6 +68,7 @@ export function Pagination({
               <VisiblePages
                 pageNumber={item}
                 onClick={paginateHandler}
+                disabled={currentPage === item}
                 isActive={currentPage === item}
                 key={item}
               />
